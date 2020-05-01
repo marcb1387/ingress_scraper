@@ -1,32 +1,40 @@
-# ingress_scraper
+# Intel Watcher
 
-original API by https://github.com/lc4t/ingress-api
-since it was last modified in 2017, since URL of intel map has changed so installing ingressAPI via pip will install version that have old url. 
+A script that allows you to scrape the Ingress Intel Map and use that information to fill a database or update Stops/Gyms that have missing info.
 
+### Credits
+- [ClarkyKent](https://github.com/ClarkyKent/ingress_scraper) who made the original Scraper
+- [The Ingress API](https://github.com/lc4t/ingress-api) this is based on
 
-In order to make API work you need cookies from ingress's intel site. 
-1. Log into you ingress account here https://intel.ingress.com/intel
-2. Press F12 and go into Network tab , then press F5(refresh) to refresh browser and to reload all info in newtowrk tab then select intel in left coulumn and Headers in right, you should see *cookie* in **Request Headers**
+## Setup
+### Cookies
+Intel Watcher needs to be able to log into the Intel Map in order to get Portal info. It does that with the login cookie.
 
+#### Notes
+- Use a burner Account to the Cookie (!!) **Scraper Accounts have been banned before**
+- The cookie runs out after 14 days. Intel Watcher can send Discord Webhooks when that happens, so you can manually get a new one
 
-![csrftoken-same-cookie](https://i.imgur.com/hyJ0ftT.jpg)
+### Get a cookie
+1. Create an Ingress account using the Ingress Prime app on your phone
+2. Log into your burner account [here](https://intel.ingress.com/intel) using that account
+3. Zooming into your area *may* improve results. (not confirmed)
+4. Press F12 and go to the Network tab, refresh the site (F5), then select `intel` in left coulumn and your window should look something like the Screenshot below.
 
+![csrftoken-same-cookie](https://i.imgur.com/y7KFNI0.png)
 
+5. Now copy everything after `cookie:` (the content highlighted in the red box) and paste it into `cookie.txt`
 
+### BBOX
+To set up an area to scrape, go to [bboxfinder.com](http://bboxfinder.com), and select your desired area using the rectangle tool. Now copy the String after `Box` in the bottom field.
 
-3. copy everything after **cookie:** and paste in Cookie section of default.ini
-
-
-# Installation 
-*pip install -r requirements.txt*
-
-# config
-for BBOX params in config file, go to http://bboxfinder.com and geofence your area you would like. once done it will give a rectangular shape for seleted area. copy whole line from after BBOX from the bottom panel)
-
+Note that you can use multiple bboxes in your config by seperating them with `;`. e.g. `-0.527344,5.441022,27.246094,20.138470;2.245674,48.795557,2.484970,48.912572`
 
 ![BBOX params](https://i.imgur.com/QKROPSU.jpg)
 
-# Run
+### Running the script
+Now proceed as usual: `pip3 install -r requirements.txt`, fill in the config and you're done.
+
+#### Arguments
 to update stops
 **python scrape_portal.py -p**
 
