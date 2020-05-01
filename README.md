@@ -7,6 +7,9 @@ A script that allows you to scrape the Ingress Intel Map and use that informatio
 - [The Ingress API](https://github.com/lc4t/ingress-api) this is based on
 
 ## Setup
+### Database
+TODO https://github.com/pmsf/PMSF/blob/master/sql/manualdb/manualdb.sql
+
 ### Cookies
 Intel Watcher needs to be able to log into the Intel Map in order to get Portal info. It does that with the login cookie.
 
