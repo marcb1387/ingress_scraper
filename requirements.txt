@@ -1,6 +1,4 @@
-requests[socks]
+requests
 lxml
 beautifulsoup4
 pymysql
-soupsieve
-discord-webhook

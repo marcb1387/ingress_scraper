@@ -90,7 +90,6 @@ class IntelMap:
             test = s.get('https://intel.ingress.com/intel', proxies=self.proxy)
             self.data_base['v'] = re.findall('/jsc/gen_dashboard_([\d\w]+).js"', test.text)[0]
             self.r = s
-            print('cookies success')
             self.cookie_dict = dict_from_cookiejar(self.r.cookies)
             self.headers.update({'x-csrftoken': self.cookie_dict['csrftoken']})
             self.isCookieOk = True
