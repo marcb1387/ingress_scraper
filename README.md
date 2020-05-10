@@ -8,20 +8,21 @@ A script that allows you to scrape the Ingress Intel Map and use that informatio
 
 ## Setup
 ### Database
-TODO https://github.com/pmsf/PMSF/blob/master/sql/manualdb/manualdb.sql
+Intel Watcher uses PMSFs database structure. If you have PMSF set up, just put its DB name in your config to also have Portals shown on your Map. Else, you can run `mysql your_db_name < ingress_portals.sql` to create a new table.
 
 ### Cookies
 Intel Watcher needs to be able to log into the Intel Map in order to get Portal info. It does that with the login cookie.
 
 #### Notes
 - Use a burner Account to the Cookie (!!) **Scraper Accounts have been banned before**
-- The cookie runs out after 14 days. Intel Watcher can send Discord Webhooks when that happens, so you can manually get a new one
+- The cookie runs out after 14 days. Intel Watcher can send Discord Webhooks when that happens, so you can manually get a new one. To re-new your cookie, follow below steps but begin with 2.
 
 ### Get a cookie
 1. Create an Ingress account using the Ingress Prime app on your phone
-2. Log into your burner account [here](https://intel.ingress.com/intel) using that account
+2. Open a new incognito window in your browser
+2. Log into your burner account [here](https://intel.ingress.com/intel) with the same Email
 3. Zooming into your area *may* improve results. (not confirmed)
-4. Press F12 and go to the Network tab, refresh the site (F5), then select `intel` in left coulumn and your window should look something like the Screenshot below.
+4. Press F12 and go to the Network tab, refresh the site (F5), then select `intel` in left coulumn and your window should look something like the Screenshot below. (Chrome)
 
 ![csrftoken-same-cookie](https://i.imgur.com/y7KFNI0.png)
 
@@ -36,23 +37,5 @@ Note that you can use multiple bboxes in your config by seperating them with `;`
 
 ### Running the script
 Now proceed as usual: `pip3 install -r requirements.txt`, fill in the config and you're done.
-
-#### Arguments
-to update stops
-**python scrape_portal.py -p**
-
-to update gyms
-**python scrape_portal.py -g**
-
-to update ingress portals in manual DB
-**python scrape_portal.py -i**
-
-to update gyms and pokestops by geofence
-**python scrape_portal.py -all -g -p**
-
-to update gyms by geofence
-**python scrape_portal.py -all -g**
-
-to update pokestops by geofence
-**python scrape_portal.py -all -p**
-It should update names and url/image in rdm DB
+- `python3 intel_watcher.py` to scrape the area
+- `python3 intel_watcher.py -u` to update Gyms and Stops with missing title andhoto
